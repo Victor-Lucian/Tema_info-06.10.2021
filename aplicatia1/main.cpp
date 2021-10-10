@@ -11,18 +11,18 @@ using namespace std;
 
 /**
     Exemplu:
-n = 4
-    12 7 1 8
+    4
+    12 7 1 6
     20 9 11 2
     15 4 5 13
     3 18 10 6
 
-    7: 1, 7 => DA
-    1: 1 => NU
-    8: 1, 2, 4, 8  => NU
-    11: 1, 11 => DA
-    2: 1, 2 => DA
-    13: 1, 13 => DA
+    7: 1, 7 => NU
+    1: 1 => DA
+    6: 1, 2, 3  => DA
+    11: 1, 11 => NU
+    2: 1, 2 => NU
+    13: 1, 13 => NU
 */
 void citire (int a[105][105], int &n)
 {
@@ -35,7 +35,7 @@ void citire (int a[105][105], int &n)
 
 int numarul_div (int x)
 {
-    int nr = 1, p;
+    int nr = 0, p;
     for (p = 0; x % 2 == 0; x /= 2, p++);
     if (p > 0)
         nr++;
