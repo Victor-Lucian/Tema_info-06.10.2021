@@ -3,6 +3,8 @@
 
 using namespace std;
 
+int a[105][105], n;
+
 void citire (int a[105][105], int &n)
 {
     ifstream fin ("matrice.in");
@@ -22,38 +24,37 @@ int nr_cif (int x)
         aux /= 10;
     }
     while (aux);
-    return nr;
+    return nr % 2 == 0;
 }
 
-int ind_linie (int a[105][105], int n)
+int linie (int l)
 {
-    int cnt = 0;
-    for (int i = 1; i < n; i++)
-    {
-        for (int j = n - i; j < n; j++)
-        {
-            if (nr_cif(a[i][j]) % 2 == 0)
-                cnt++;
-        }
-        if (cnt == n)
-            return i;
-    }
 
+    for (int j = n - l; j < n; j++)
+    {
+        if (!nr_cif(a[l][j]))
+            return 0;
+    }
+    return 1;
 }
 
-void afisare (int a[105][105], int n)
+void afisare (int a[105][105], int &n)
 {
     ofstream fout ("matrice.out");
+    int ok = 0;
     for (int i = 0; i < n; i++)
-        for (int j = 0; j < n; j++)
-            fout << ind_linie(a, n) << " ";
+        if (linie(i))
+        {
+            fout << i << " ";
+            ok = 1;
+        }
+    if (!ok)
+        fout << "NU EXISTA LINII";
 }
 
 int main()
 {
-    int a[105][105], n;
     citire(a, n);
-    ind_linie(a, n);
     afisare(a, n);
     return 0;
 }
